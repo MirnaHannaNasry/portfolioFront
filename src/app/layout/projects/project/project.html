@@ -1,0 +1,25 @@
+<div class="card project">
+  @if (myProject.imageUrl) {
+    <img [src]="myProject.imageUrl" class="project-img" alt="">
+  }
+
+  <div class="project-body">
+    <h3 class="project-title">{{ myProject.title }}</h3>
+    <p class="muted project-desc">{{ myProject.description }}</p>
+
+    <div class="tags">
+      @for (tag of myProject.tags; track tag) {
+        <span class="tag">{{ tag }}</span>
+      }
+    </div>
+
+    <div class="links">
+      @if (myProject.projectUrl) {
+        <a [href]="myProject.projectUrl" target="_blank"><span class="icon i-external"></span> Live</a>
+      }
+      @if (myProject.githubUrl) {
+        <a [href]="myProject.githubUrl" target="_blank"><span class="icon i-github"></span> Code</a>
+      }
+    </div>
+  </div>
+</div>

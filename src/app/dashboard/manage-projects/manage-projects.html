@@ -1,0 +1,450 @@
+
+<div class="manage-projects">
+
+  <!-- Page Header -->
+  <div class="page-header">
+
+    <div>
+      <h1>Projects</h1>
+      <p>Manage your portfolio projects.</p>
+    </div>
+
+    <button
+      type="button"
+      class="btn-teal"
+      (click)="openAdd()">
+
+      <span>+</span>
+      New Project
+
+    </button>
+
+  </div>
+
+
+  <!-- Projects List -->
+  <div class="projects-list">
+
+    @for (project of projects; track project._id) {
+
+      <div class="project-card">
+
+        <!-- Image -->
+        @if (project.imageUrl) {
+
+          <img
+            [src]="project.imageUrl"
+            [alt]="project.title"
+            class="project-image">
+
+        }
+
+
+        <!-- Project Info -->
+        <div class="project-info">
+
+          <div class="project-title">
+
+            {{ project.title }}
+
+            @if (project.featured) {
+
+              <span class="featured">
+                ★
+              </span>
+
+            }
+
+          </div>
+
+
+          @if (project.description) {
+
+            <p class="project-description">
+              {{ project.description }}
+            </p>
+
+          }
+
+
+          <!-- Tags -->
+          @if (project.tags?.length) {
+
+            <div class="tags">
+
+              @for (tag of project.tags; track tag) {
+
+                <span class="tag">
+                  {{ tag }}
+                </span>
+
+              }
+
+            </div>
+
+          }
+
+        </div>
+
+
+        <!-- Actions -->
+        <div class="project-actions">
+
+          <button
+            type="button"
+            class="icon-btn"
+            (click)="openEdit(project)"
+            title="Edit">
+
+            ✎
+
+          </button>
+
+
+          <button
+            type="button"
+            class="icon-btn danger"
+            (click)="remove(project._id!)"
+            title="Delete">
+
+            🗑
+
+          </button>
+
+        </div>
+
+      </div>
+
+    }
+
+
+    @empty {
+
+      <div class="empty-card">
+
+        <div class="empty-icon">
+          📁
+        </div>
+
+        <p>No projects yet.</p>
+
+        <button
+          type="button"
+          class="btn-outline"
+          (click)="openAdd()">
+
+          + Add your first project
+
+        </button>
+
+      </div>
+
+    }
+
+  </div>
+
+
+  <!-- Add / Edit Modal -->
+  @if (showModal) {
+
+    <div
+      class="modal-backdrop"
+      (click)="close()">
+
+      <div
+        class="modal-box"
+        (click)="$event.stopPropagation()">
+
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+
+          <h2>
+            {{ editingId ? 'Edit Project' : 'New Project' }}
+          </h2>
+
+          <button
+            type="button"
+            class="close-btn"
+            (click)="close()">
+
+            ×
+
+          </button>
+
+        </div>
+
+
+        <!-- Form -->
+        <form
+          #myForm="ngForm"
+          (ngSubmit)="save(myForm)"
+          class="project-form">
+
+
+          <!-- Title -->
+          <div class="form-group">
+
+            <label>
+              Title *
+            </label>
+
+            <input
+              type="text"
+              name="title"
+              ngModel
+              required
+              #title="ngModel"
+              placeholder="My Awesome Project">
+
+            @if (title.invalid && title.touched) {
+
+              <span class="error">
+                Title is required
+              </span>
+
+            }
+
+          </div>
+
+
+          <!-- Description -->
+          <div class="form-group">
+
+            <label>
+              Description
+            </label>
+
+            <textarea
+              name="description"
+              ngModel
+              rows="4"
+              placeholder="A brief description of the project...">
+            </textarea>
+
+          </div>
+
+
+          <!-- Image -->
+          <div class="form-group">
+
+            <label>
+              Image URL
+            </label>
+
+            <input
+              type="text"
+              name="imageUrl"
+              ngModel
+              placeholder="https://...">
+
+          </div>
+
+
+          <!-- URLs -->
+          <div class="form-row">
+
+            <div class="form-group">
+
+              <label>
+                Project URL
+              </label>
+
+              <input
+                type="url"
+                name="projectUrl"
+                ngModel
+                placeholder="https://...">
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label>
+                GitHub URL
+              </label>
+
+              <input
+                type="url"
+                name="githubUrl"
+                ngModel
+                placeholder="https://github.com/...">
+
+            </div>
+
+          </div>
+
+
+          <!-- Tags -->
+          <div class="form-group">
+
+            <label>
+              Tags
+            </label>
+
+            <div class="tag-input">
+
+              <input
+                type="text"
+                #tagInput
+                placeholder="Add a tag"
+                (keydown.enter)="addTag(tagInput); $event.preventDefault()">
+
+              <button
+                type="button"
+                class="btn-outline"
+                (click)="addTag(tagInput)">
+
+                Add
+
+              </button>
+
+            </div>
+
+
+            @if (tags.length > 0) {
+
+              <div class="tags selected-tags">
+
+                @for (tag of tags; track tag; let i = $index) {
+
+                  <span class="tag">
+
+                    {{ tag }}
+
+                    <button
+                      type="button"
+                      class="remove-tag"
+                      (click)="removeTag(i)">
+
+                      ×
+
+                    </button>
+
+                  </span>
+
+                }
+
+              </div>
+
+            }
+
+          </div>
+
+
+          <!-- Featured -->
+          <div class="checkbox-group">
+
+            <input
+              type="checkbox"
+              id="featured"
+              name="featured"
+              ngModel>
+
+            <label for="featured">
+              Featured project
+            </label>
+
+          </div>
+
+
+          <!-- Message -->
+          @if (message) {
+
+            <div class="message">
+              {{ message }}
+            </div>
+
+          }
+
+
+          <!-- Form Buttons -->
+          <div class="form-actions">
+
+            <button
+              type="button"
+              class="btn-outline cancel-btn"
+              (click)="close()">
+
+              Cancel
+
+            </button>
+
+            <button
+              type="submit"
+              class="btn-teal">
+
+              {{ editingId ? 'Save Changes' : 'Create Project' }}
+
+            </button>
+
+          </div>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  }
+
+
+  <!-- Delete Confirmation Modal -->
+  @if (showDeleteModal) {
+
+    <div
+      class="delete-backdrop"
+      (click)="cancelDelete()">
+
+      <div
+        class="delete-modal"
+        (click)="$event.stopPropagation()">
+
+
+        <div class="delete-icon">
+          🗑
+        </div>
+
+
+        <h2>
+          Delete Project?
+        </h2>
+
+
+        <p>
+          Are you sure you want to delete this project?
+          This action will move it to trash.
+        </p>
+
+
+        <div class="delete-actions">
+
+          <button
+            type="button"
+            class="btn-outline"
+            (click)="cancelDelete()">
+
+            Cancel
+
+          </button>
+
+
+          <button
+            type="button"
+            class="delete-confirm-btn"
+            (click)="confirmDelete()">
+
+            Delete
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  }
+
+</div>

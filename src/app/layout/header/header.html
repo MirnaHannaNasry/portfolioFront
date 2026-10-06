@@ -1,0 +1,41 @@
+<nav class="navbar">
+
+  <div class="navbar-container">
+
+    <a class="navbar-brand" routerLink="/profile">
+      <span class="brand-icon">&lt;/&gt;</span>
+      <span>My Portfolio</span>
+    </a>
+
+    <div class="navbar-links">
+
+      <a
+        routerLink="/profile"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }">
+        Profile
+      </a>
+
+      <a
+        routerLink="/projects"
+        routerLinkActive="active">
+        Projects
+      </a>
+
+      <a
+        routerLink="/skills"
+        routerLinkActive="active">
+        Skills
+      </a>
+
+    </div>
+
+    <a
+      class="contact-btn"
+      routerLink="/contact">
+      Contact Me
+    </a>
+
+  </div>
+
+</nav>

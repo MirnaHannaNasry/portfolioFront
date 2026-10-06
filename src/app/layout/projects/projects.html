@@ -1,0 +1,14 @@
+<section id="projects" class="projects">
+  <div class="container">
+    <h2 class="section-title">Projects</h2>
+
+    <div class="grid">
+      @for (project of projects; track project._id) {
+        <app-project [myProject]="project"></app-project>
+      }
+      @empty {
+        <p class="empty-text">No projects yet. Add some from the dashboard.</p>
+      }
+    </div>
+  </div>
+</section>

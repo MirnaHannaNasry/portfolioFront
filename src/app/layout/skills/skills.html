@@ -1,0 +1,22 @@
+@if (skills && skills.length > 0) {
+  <section id="skills" class="skills">
+    <div class="container">
+      <h2 class="section-title">Skills</h2>
+
+      <div class="grid">
+        @for (skill of skills; track skill._id) {
+          <div class="card skill">
+            <div class="skill-top">
+              <span class="skill-name">{{ skill.name }}</span>
+              <span class="muted">{{ skill.proficiency }}%</span>
+            </div>
+            <div class="bar">
+              <div class="fill" [style.width.%]="skill.proficiency"></div>
+            </div>
+            <small class="muted">{{ skill.category }}</small>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+}

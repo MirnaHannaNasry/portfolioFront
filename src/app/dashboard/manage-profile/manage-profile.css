@@ -1,0 +1,192 @@
+.profile-page {
+  padding: 30px;
+  color: #ffffff;
+}
+
+.page-header {
+  margin-bottom: 25px;
+}
+
+.page-header h2 {
+  margin: 0 0 8px;
+  font-size: 28px;
+}
+
+.page-header p {
+  margin: 0;
+  color: #9ca3af;
+}
+
+
+/* Card */
+
+.profile-card {
+  background: #111827;
+  border: 1px solid #1f2937;
+  border-radius: 12px;
+  padding: 25px;
+  max-width: 900px;
+}
+
+
+/* Form */
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #d1d5db;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  border: 1px solid #374151;
+  border-radius: 7px;
+  background: #1f2937;
+  color: #ffffff;
+  font-size: 14px;
+  outline: none;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #14b8a6;
+}
+
+
+/* Row */
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+
+/* Upload */
+
+.upload-box {
+  border: 2px dashed #374151;
+  border-radius: 10px;
+  padding: 35px 20px;
+  text-align: center;
+  background: #0f172a;
+  transition: 0.2s;
+}
+
+.upload-box:hover {
+  border-color: #14b8a6;
+}
+
+.upload-icon {
+  font-size: 32px;
+  color: #14b8a6;
+  margin-bottom: 10px;
+}
+
+.upload-box p {
+  margin: 5px 0;
+  color: #d1d5db;
+}
+
+.upload-box span {
+  display: block;
+  margin: 8px 0;
+  color: #6b7280;
+}
+
+
+/* Choose Image */
+
+.choose-btn {
+  display: inline-block !important;
+  width: auto !important;
+  margin-top: 8px;
+  padding: 9px 16px;
+  border: 1px solid #374151;
+  border-radius: 6px;
+  color: #ffffff !important;
+  background: #1f2937;
+  cursor: pointer;
+}
+
+.choose-btn:hover {
+  border-color: #14b8a6;
+}
+
+
+/* Selected file */
+
+.selected-file {
+  margin-top: 15px !important;
+  color: #14b8a6 !important;
+  font-size: 13px;
+}
+
+
+/* Validation */
+
+.msg {
+  display: block;
+  margin-top: 6px;
+  color: #f87171;
+  font-size: 13px;
+}
+
+
+/* Success message */
+
+.message {
+  color: #14b8a6;
+  margin-bottom: 15px;
+}
+
+
+/* Save */
+
+.save-btn {
+  border: none;
+  border-radius: 7px;
+  padding: 11px 20px;
+  background: #14b8a6;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.save-btn:hover {
+  background: #0d9488;
+}
+
+
+/* Responsive */
+
+@media (max-width: 700px) {
+
+  .profile-page {
+    padding: 20px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .profile-card {
+    padding: 18px;
+  }
+
+}
